@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="My2048">
+
+	<resultMap type="cn.teddywang.entity.game.My2048" id="My2048Result">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+		<result column="maxScore" jdbcType="INTEGER" property="maxScore" />
+		<result column="save" jdbcType="VARCHAR" property="save" />
+		<result column="maxLevel" jdbcType="INTEGER" property="maxLevel" />
+		<association property="user" javaType="cn.teddywang.entity.User" >
+		<result property="nickname" column="nickname"/>
+		</association>
+	</resultMap>
+	
+	<insert id="addMy2048" parameterType="cn.teddywang.entity.game.My2048" useGeneratedKeys="true" keyProperty="id">
+		insert into my2048(score, maxScore, save, maxLevel, userId) values (#{score}, #{maxScore}, #{save}, #{maxLevel}, #{user.id})
+	</insert>
+	
+	<update id="updateMy2048" parameterType="cn.teddywang.entity.game.My2048">
+		update my2048 set score=#{score}, maxScore=#{maxScore}, save=#{save}, maxLevel=#{maxLevel} where id=#{id}
+	</update>
+	
+	<select id="getMy2048" parameterType="Integer" resultMap="My2048Result">
+		select id, score, maxScore, save, maxLevel from my2048 where userId = #{_parameter}
+	</select>
+	
+	<select id="userResult" parameterType="Integer">
+		select nickname from user where userId = #{userId}
+	</select>
+	
+	<select id="getTop10" resultMap="My2048Result">
+		select maxScore, maxLevel, nickname from my2048, user 
+		where my2048.userId = user.id order by maxScore desc limit 10;
+	</select>
+	
+</mapper>

@@ -1,0 +1,1 @@
+$("#main").height(($(window).height()-50));
