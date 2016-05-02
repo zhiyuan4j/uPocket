@@ -52,8 +52,8 @@ public class WechatController {
 							new NewsItem(
 								"欢迎进入uPocket主页", 
 								"点开图文链接进入uPocket主页", 
-								"http://teddywang.cn/uPocket/images/uPocket.jpg", 
-								"http://teddywang.cn/uPocket/index"
+								"http://teddywang.cn/images/uPocket.jpg", 
+								"http://teddywang.cn/index"
 //								"http://upocket.ngrok.natapp.cn/uPocket/images/uPocket.jpg",
 //								"http://upocket.ngrok.natapp.cn/uPocket/index"
 							)

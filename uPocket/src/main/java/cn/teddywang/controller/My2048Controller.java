@@ -29,7 +29,7 @@ public class My2048Controller {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		if(user == null) {
 			//用户尚未登录，跳转到错误页
-			response.sendRedirect("/uPocket/login.jsp");
+			response.sendRedirect("../login.jsp");
 			return null;
 		} else {
 			//获得用户的2048游戏记录
@@ -60,9 +60,9 @@ public class My2048Controller {
 		if(my.getId() == 0) {
 			//用户第一次玩2048并保存游戏
 			my = my2048Service.add(my);
-			request.getSession().setAttribute("my2048", my);
-			if(my2048Service.add(my).getId() != 0) {
+			if(my.getId() != 0) {
 				out.write("success");
+				request.getSession().setAttribute("my2048", my);
 			} else {
 				out.write("failure");
 			}

@@ -37,6 +37,32 @@ function getLevel() {
 	return max;
 }
 
+//点击排行榜
+function rank() {
+	//先保存用户的游戏进度
+	$.ajax({
+		url: "./save",
+		type: "post",
+		dataType: "text",
+		data: {
+			score: $("#score").text(),
+			board: arrayToString(board),
+			level: getLevel()
+		},
+		success: function(data) {
+			if(data == "success") {
+				//保存成功，跳转到排行榜
+				window.location.href="./rank";
+			}else {
+				alert("未能成功保存游戏，不能查看排行榜，否则游戏进度会丢失");
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("XHR status="+XMLHttpRequest.status+";readyState="+XMLHttpRequest.readyState +";textStatus="+textStatus);
+		}
+	});
+}
+
 //点击保存按钮
 function savegame() {
 	$.ajax({
@@ -65,13 +91,18 @@ function loadgame() {
 	init();
 	//载入数据
 	var saveBoard = $("#board").text();
-	var temp = saveBoard.split(",");
-	for(var i=0; i<4; i++) {
-		board[i] = new Array();
-		hasConflicted[i] = new Array();
-		for(var j=0; j<4; j++) {
-			var num = parseInt(temp[i*4+j]);
-			board[i][j] = num;
+	if(saveBoard == "") {
+		newgame();
+	} else {
+		
+		var temp = saveBoard.split(",");
+		for(var i=0; i<4; i++) {
+			board[i] = new Array();
+			hasConflicted[i] = new Array();
+			for(var j=0; j<4; j++) {
+				var num = parseInt(temp[i*4+j]);
+				board[i][j] = num;
+			}
 		}
 	}
 	//更新棋盘
@@ -133,6 +164,7 @@ function init() {
 	updateBoardView();
 
 	score = 0;
+	
 }
 
 function updateBoardView() {
@@ -240,53 +272,58 @@ $(document).keydown(function(event) {
 	}
 });
 
-document.addEventListener('touchstart', function(event) {
+document.getElementById("grid-container").addEventListener('touchstart',function(event){
 	event.preventDefault();
-	startx = event.touches[0].pageX;
-	starty = event.touches[0].pageY;
+    startx = event.touches[0].pageX;
+    starty = event.touches[0].pageY;
 });
 
-document.addEventListener('touchend', function(event) {
-	endx = event.changedTouches[0].pageX;
-	endy = event.changedTouches[0].pageY;
+document.getElementById("grid-container").addEventListener('touchend',function(event){
+    endx = event.changedTouches[0].pageX;
+    endy = event.changedTouches[0].pageY;
 
-	var deltax = endx - startx;
-	var deltay = endy - starty;
+    var deltax = endx - startx;
+    var deltay = endy - starty;
 
-	if (Math.abs(deltax) < 0.3 * documentWidth
-			&& Math.abs(deltay) < 0.3 * documentWidth)
-		return;
+    if( Math.abs( deltax ) < 0.3*documentWidth && Math.abs( deltay ) < 0.3*documentWidth ) {
+        document.removeEventListener('touchend', this);
+        return;
+    } else {
+        event.preventDefault();
+    }
+    if( Math.abs( deltax ) >= Math.abs( deltay ) ){
 
-	if (Math.abs(deltax) >= Math.abs(deltay)) {
-
-		if (deltax > 0) {
-			// move right
-			if (moveRight()) {
-				setTimeout("generateOneNumber()", 210);
-				setTimeout("isgameover()", 300);
-			}
-		} else {
-			// move left
-			if (moveLeft()) {
-				setTimeout("generateOneNumber()", 210);
-				setTimeout("isgameover()", 300);
-			}
-		}
-	} else {
-		if (deltay > 0) {
-			// move down
-			if (moveDown()) {
-				setTimeout("generateOneNumber()", 210);
-				setTimeout("isgameover()", 300);
-			}
-		} else {
-			// move up
-			if (moveUp()) {
-				setTimeout("generateOneNumber()", 210);
-				setTimeout("isgameover()", 300);
-			}
-		}
-	}
+        if( deltax > 0 ){
+            //move right
+            if( moveRight() ){
+                setTimeout("generateOneNumber()",210);
+                setTimeout("isgameover()",300);
+            }
+        }
+        else{
+            //move left
+            if( moveLeft() ){
+                setTimeout("generateOneNumber()",210);
+                setTimeout("isgameover()",300);
+            }
+        }
+    }
+    else{
+        if( deltay > 0 ){
+            //move down
+            if( moveDown() ){
+                setTimeout("generateOneNumber()",210);
+                setTimeout("isgameover()",300);
+            }
+        }
+        else{
+            //move up
+            if( moveUp() ){
+                setTimeout("generateOneNumber()",210);
+                setTimeout("isgameover()",300);
+            }
+        }
+    }
 });
 
 function isgameover() {

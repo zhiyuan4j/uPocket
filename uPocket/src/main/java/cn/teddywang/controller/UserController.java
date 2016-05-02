@@ -68,6 +68,7 @@ public class UserController {
 	
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String register(User user, Map<String, Object> map) {
+		System.out.println(user);
 		boolean flag = userService.addUser(user);
 		if(flag) {
 			map.put("result", "注册成功");
