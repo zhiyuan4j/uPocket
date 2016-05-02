@@ -17,11 +17,12 @@ import cn.teddywang.entity.User;
 import cn.teddywang.service.IUserService;
 @SessionAttributes(value={"loginUser"})
 @Controller
+@RequestMapping("/")
 public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	@RequestMapping(value="/checkUsername.do", method=RequestMethod.GET)
+	@RequestMapping(value="checkUsername.do", method=RequestMethod.GET)
 	public void checkUsername(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String username = request.getParameter("username");
 		
@@ -37,7 +38,7 @@ public class UserController {
 		out.close();
 	}
 	
-	@RequestMapping(value="/checkNickname.do", method=RequestMethod.GET)
+	@RequestMapping(value="checkNickname.do", method=RequestMethod.GET)
 	public void checkNicname(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String nickname = request.getParameter("nickname");
 		
@@ -53,7 +54,7 @@ public class UserController {
 		out.close();
 	}
 	
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(User user, Map<String, Object> map) {
 		User loginUser = userService.getLoginUser(user.getUsername(), user.getPassword());
 		if(loginUser == null) {
@@ -65,7 +66,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/register.do", method=RequestMethod.POST)
+	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String register(User user, Map<String, Object> map) {
 		boolean flag = userService.addUser(user);
 		if(flag) {
@@ -76,17 +77,18 @@ public class UserController {
 		return "register";
 	}
 	
-	@RequestMapping("/login.jsp")
+	@RequestMapping("login.jsp")
 	public String getLogin() {
 		return "login";
 	}
 	
-	@RequestMapping("/register.jsp")
+	@RequestMapping("register.jsp")
 	public String getRegister() {
 		return "register";
 	}
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String getIndex() {
 		return "index";
 	}
+	
 }

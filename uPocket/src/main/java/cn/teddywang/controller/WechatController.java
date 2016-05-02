@@ -22,7 +22,7 @@ import cn.teddywang.entity.wechat.TextMessage;
 import cn.teddywang.message.Messages;
 import cn.teddywang.util.MessageUtil;
 import cn.teddywang.util.WechatUtil;
-
+@RequestMapping("/wechat")
 @Controller
 public class WechatController {
 	@RequestMapping(value="/wechat.do", method=RequestMethod.GET)
@@ -52,8 +52,10 @@ public class WechatController {
 							new NewsItem(
 								"欢迎进入uPocket主页", 
 								"点开图文链接进入uPocket主页", 
-								"http://upocket.ngrok.natapp.cn/images/uPocket.jpg", 
-								"http://upocket.ngrok.natapp.cn"
+								"http://teddywang.cn/uPocket/images/uPocket.jpg", 
+								"http://teddywang.cn/uPocket/index"
+//								"http://upocket.ngrok.natapp.cn/uPocket/images/uPocket.jpg",
+//								"http://upocket.ngrok.natapp.cn/uPocket/index"
 							)
 					);
 					NewsMessage txt = new NewsMessage(
@@ -76,7 +78,7 @@ public class WechatController {
 					out.print(MessageUtil.textMessageToXml(txt));
 				}
 			} else if("event".equals(map.get("MsgType"))){
-				if("subscribe".equals(map.get("event"))) {
+				if("subscribe".equals(map.get("Event"))) {
 					TextMessage txt = new TextMessage(
 							map.get("FromUserName"),
 							map.get("ToUserName"), 

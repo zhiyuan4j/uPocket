@@ -12,16 +12,15 @@ header{
 
 header h1{
     font-family:Arial;
-    font-size:40px;
+    font-size:20px;
     font-weight:bold;
     margin:0 auto;
 }
 
 header .gamebutton{
     display:inline-block;
-    margin:10px auto;
+    margin:5px auto;
 
-    width:100px;
     padding:10px 10px;
     background-color:#8f7a66;
 
@@ -37,8 +36,8 @@ header .gamebutton:hover{
 
 header p{
     font-family:Arial;
-    font-size:25px;
-    margin:10px auto;
+    font-size:10px;
+    margin:5px auto;
 }
 
 #grid-container{

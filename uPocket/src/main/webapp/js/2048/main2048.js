@@ -40,7 +40,7 @@ function getLevel() {
 //点击保存按钮
 function savegame() {
 	$.ajax({
-		url: "/my2048/save",
+		url: "./save",
 		type: "post",
 		dataType: "text",
 		data: {
@@ -50,7 +50,7 @@ function savegame() {
 		},
 		success: function(data) {
 			if(data == "success") {
-				window.location.href="/index"
+				window.location.href="../index"
 			}else 
 				alert("保存失败");
 		},

@@ -23,8 +23,8 @@
 			</div>
 			
 			<button type="submit" class="btn btn-default" id="loginBtn">登录</button>
-			<div>${requestScope.result}</div>
-			<div class="pull-right"><a href="/register.jsp">点此注册</a></div>
+			<a href="./register.jsp"><button type="button" class="btn btn-default pull-right">点此注册</button></a>
+			<div style="color:red">${requestScope.result}</div>
 		</form>
 	</div>
 	<script src="./js/jquery-1.12.3.min.js"></script>

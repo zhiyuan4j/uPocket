@@ -5,7 +5,6 @@
 	
 }
 .index {
-	background: url('../images/IMG_0254_1.jpg');  
 	background-size:cover; 
 }
 .navbar-brand {
@@ -30,4 +29,9 @@
 }
 body {
 	background-color: #f2f2f2;
+	background: url('../images/bg.jpg');
+	background-size:cover;
+}
+.form-group label {
+	color: #f2f2f2;
 }

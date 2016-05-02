@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="/register.do" method="post">
+		<form action="./register.do" method="post">
 			<div class="form-group" id="nicknameGroup">
 				<label for="InputNickname" class="control-label">Nickname</label>
 				<input type="text" class="form-control" id="InputNickname" placeholder="昵称" name="nickname">
@@ -31,8 +31,8 @@
 			</div>
 			
 			<button type="submit" class="btn btn-default" id="registBtn" disabled>注册</button>
-			<div id="result">${requestScope.result} </div>
-			<div class="pull-right"><a href="/login.jsp">点此登录</a></div>
+			<a href="./login.jsp"><button type="button" class="btn btn-default pull-right">点此登录</button></a>
+			<div id="result" style="color:red">${requestScope.result} </div>
 		</form>
 	</div>
 	<script src="./js/jquery-1.12.3.min.js"></script>

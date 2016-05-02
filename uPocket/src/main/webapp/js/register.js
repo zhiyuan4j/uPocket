@@ -6,7 +6,7 @@ $("#InputNickname").blur(function() {
 		$("#nicknameGroup").prop("class", "form-group has-error");
 	} else {
 		$.ajax({
-			url : "/checkNickname.do",
+			url : "./checkNickname.do",
 			type : "GET",
 			dataType : "text",
 			cache: false,
@@ -48,7 +48,7 @@ $("#InputUsername").bind("input propertychange", function() {
 $("#InputUsername").blur(function() {
 	if($("#InputUsername").val() != "") {
 		$.ajax({
-			url : "/checkUsername.do",
+			url : "./checkUsername.do",
 			type : "get",
 			dataType : "text",
 			data : {

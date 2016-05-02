@@ -25,11 +25,12 @@ public class My2048Controller {
 	private I2048Service my2048Service;
 	
 	@RequestMapping("/index")
-	public String getMy2048(Map<String, Object> map, HttpServletRequest request) {
+	public String getMy2048(Map<String, Object> map, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		if(user == null) {
 			//用户尚未登录，跳转到错误页
-			return "error";
+			response.sendRedirect("/uPocket/login.jsp");
+			return null;
 		} else {
 			//获得用户的2048游戏记录
 			My2048 my2048 = my2048Service.getMy2048(user);
