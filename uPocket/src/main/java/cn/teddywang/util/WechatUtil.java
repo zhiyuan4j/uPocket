@@ -6,12 +6,6 @@ import java.util.Arrays;
 
 public class WechatUtil {
 	private static final String token = "wang";
-//	private static final String appid = "wxa4c0b9c00d0f838c";
-//	private static final String redirect_uri = "https://www.baidu.com";
-//	private static final String scope = "snsapi_userinfo";
-//	private static final String state = "1";
-//	private static String oAuth = "https://open.weixin.qq.com/connect/oauth2/authorize?"
-//			+ "appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
 	
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		String[] arr = new String[] {token, timestamp, nonce};
